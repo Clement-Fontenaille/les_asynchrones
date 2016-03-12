@@ -1,23 +1,12 @@
 #include "../include/IA.hpp"
 
-using namespace std;
-using namespace ainet16;
 
 
 
-Session session;
-Welcome welcome;
-GameParameters p;
-string address;
-string port_str;
-int port;
-string name;
-Actions actions;
-
-void init_session(){
+void init_session(int argc, char ** argv){
 	address = argv[1];
 	port_str = argv[2];
-	port = std::stoi(port_str)
+	port = std::stoi(port_str);
 	string name = "Les_Asynchrones";
 	
 	printf("Connecting to %s:%d...\n", address.c_str(), port);
@@ -177,7 +166,7 @@ int main(int argc, char ** argv)
 
     try
     {
-		init_session();
+		init_session(argc, argv);
 		init_game_params();
 		while(session.is_logged())
 		{
