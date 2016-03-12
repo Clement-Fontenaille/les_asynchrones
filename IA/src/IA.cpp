@@ -1,7 +1,7 @@
 #include <cmath>
 #include "../include/IA.hpp"
 
-void play_turn(){
+void play_turn(Actions & actions, GameParameters &p, Session & session){
 	played_cells.clear();
 	// Let us now try to do some actions!
 
@@ -53,7 +53,7 @@ float moveDistance(const TurnPlayerCell & cell)
 	return max(0, p.base_cell_speed - p.speed_loss_factor * cell.mass);
 }
 
-// Est que la myCell peut être mangé par ennemyCell au prochain tour ?
+// Est que myCell peut être mangé par ennemyCell au prochain tour ?
 bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell)
 {
 	if(
@@ -64,3 +64,16 @@ bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & 
     else
         return false;
 }
+
+// Est que myCell peut manger ennemyCell au prochain tour ?
+bool canEatEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell)
+{
+	if(
+		(radius(myCell) > radius(ennemyCell)) &&
+		(cellDistance(ennemyCell, myCell) < (moveDistance(myCell) + radius(myCell)))
+	) 
+        return true;
+    else
+        return false;
+}
+

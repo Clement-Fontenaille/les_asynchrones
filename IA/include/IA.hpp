@@ -21,6 +21,8 @@ float radius(const TurnPlayerCell & C);
 
 float moveDistance(const TurnPlayerCell & cell);
 bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell);
+bool canEatEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell);
+
 //~ struct Position
 //~ {
 	//~ float x; //! L'abscisse, comprise dans [0,map_width[
