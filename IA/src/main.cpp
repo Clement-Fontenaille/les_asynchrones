@@ -1,4 +1,10 @@
-#include "../include/IA.hpp"
+#include <iostream>
+#include <stdio.h>
+
+#include <ainetlib16.hpp>
+
+using namespace std;
+using namespace ainet16;
 
 int main(int argc, char ** argv)
 {
@@ -8,13 +14,14 @@ int main(int argc, char ** argv)
         return 1;
     }
 
-    address = argv[1];
-    port_str = argv[2];
-    port = std::stoi(port_str);
-    name = "example_cpp";
+    string address = argv[1];
+    string port_str = argv[2];
+    int port = std::stoi(port_str);
+    string name = "example_cpp";
 
     try
     {
+        Session session;
 
         printf("Connecting to %s:%d...\n", address.c_str(), port);
         session.connect(address, port);
@@ -24,13 +31,13 @@ int main(int argc, char ** argv)
 
         printf("Waiting for WELCOME...\n");
         session.wait_for_welcome();
-        welcome = session.welcome();
+        Welcome welcome = session.welcome();
 
         /* =======================================
          * Informations within the WELCOME message
          * ======================================= */
 
-        p = welcome.parameters;
+        GameParameters p = welcome.parameters;
         printf("Game parameters:\n");
         printf("  map dimensions : (0,0) -> (%g,%g)\n", p.map_width, p.map_height);
         printf("  there will be %d turns\n", p.nb_turns);
@@ -161,7 +168,7 @@ int main(int argc, char ** argv)
             }
 
             // Let us now try to do some actions!
-			play_turn(actions);
+			play_turn(actions, p);
         }
     }
     catch (const ainet16::GameFinishedException & e)

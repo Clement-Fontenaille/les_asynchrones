@@ -17,5 +17,5 @@ static string name;
 
 
 
-void play_turn(Actions & actions);
+void play_turn(Actions & actions, GameParameters &p);
 float dist(float x1, float x2, float y1, float y2);

@@ -1,7 +1,7 @@
 #include <cmath>
 #include "../include/IA.hpp"
 
-void play_turn(Actions & actions){
+void play_turn(Actions & actions, GameParameters &p){
 	// Let us now try to do some actions!
 
 	// Action 1: let us try to move cell (id=73) to position (x=42, y=4242)
