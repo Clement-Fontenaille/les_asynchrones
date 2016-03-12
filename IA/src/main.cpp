@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
          * Informations within the WELCOME message
          * ======================================= */
 
-        GameParameters p = welcome.parameters;
+        p = welcome.parameters;
         printf("Game parameters:\n");
         printf("  map dimensions : (0,0) -> (%g,%g)\n", p.map_width, p.map_height);
         printf("  there will be %d turns\n", p.nb_turns);
@@ -97,7 +97,7 @@ int main(int argc, char ** argv)
 
         while(session.is_logged())
         {
-            Actions actions;
+            actions.clear();
             /*     .
              *    / \    If you use the same Actions instance on all turns,
              *   /   \   do NOT forget to clear the previously made actions
