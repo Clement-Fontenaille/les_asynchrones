@@ -6,15 +6,15 @@
 using namespace std;
 using namespace ainet16;
 
-static Actions actions;
-static GameParameters p;
-static Session session;
+static Actions * actions;
+static GameParameters * p;
+static Session * session;
 
 static set<int> played_cells;
 
 float max(float a, float b);
 
-void play_turn(Actions & actions, GameParameters &p, Session & session);
+void play_turn(Actions & actions);
 float dist(float x1, float x2, float y1, float y2);
 float cellDistance(const TurnPlayerCell & C1, const TurnPlayerCell & C2);
 float radius(const TurnPlayerCell & C);
