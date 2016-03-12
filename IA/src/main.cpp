@@ -164,6 +164,16 @@ void init_turn(){
 
 int main(int argc, char ** argv)
 {
+    if (argc != 3)
+    {
+        printf("Usage: %s HOSTNAME PORT\n", argv[0]);
+        return 1;
+    }
+
+    string address = argv[1];
+    string port_str = argv[2];
+    int port = std::stoi(port_str);
+    string name = "example_cpp";
     try
     {
         Session session;
