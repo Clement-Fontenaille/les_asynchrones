@@ -158,6 +158,7 @@ int main(int argc, char ** argv)
          * Informations within the WELCOME message
          * ======================================= */
 		p = new GameParameters ();
+		assert (p != nullptr);
 		init_game_parameters(*p,*welcome,*session);
         while(session->is_logged())
         {
