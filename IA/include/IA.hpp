@@ -32,6 +32,7 @@ vector<int> isInDangerFromAnotherCell(const TurnPlayerCell & myCell);
 
 int getNearestDangerousCell(vector<int> dangerousCells, const TurnPlayerCell & myCell);
 void goToOppositeDirectionFromDangerousCell(int ennemiIndex, const TurnPlayerCell & myCell);
+bool targetIsSafe(const TurnPlayerCell & cell, const Position & pos);
 
 //~ struct Position
 //~ {

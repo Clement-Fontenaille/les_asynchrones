@@ -9,7 +9,7 @@ void play_turn(){
 	// pour chacune de mes cellules
 	for (const TurnPlayerCell & cell : session->my_player_cells())
 	{
-		// recupere l'iD de la cellule ennemie la + dangereuse
+		// recupere l'iD de la cellule ennemie la + dangereuse, pour fuir
 		vector<int> dangerousCells = isInDangerFromAnotherCell(cell);
 		if (dangerousCells.size())
 		{
@@ -18,28 +18,12 @@ void play_turn(){
 		}
 		else
 		{
-			// avance Random
+			// sinon avance Random
 			actions->add_move_action(cell.pcell_id, float(rand())/RAND_MAX*p->map_width, float(rand())/RAND_MAX*p->map_height);
 
 		}
 	}
 
-	
-	
-/**	// Let us now try to do some actions!
-
-	// Action 1: let us try to move cell (id=73) to position (x=42, y=4242)
-	actions->add_move_action(73, 42, 4242);
-	// Action 2: let us try to divide cell (id=51) to create a child cell of mass=3 towards the (0,0) corner
-	actions->add_divide_action(51, 0, 0, 3);
-	// Action 3: let us try to create a virus from cell (id=42) towards the (map_width,map_height) corner
-	actions->add_create_virus_action(42, p->map_width, p->map_height);
-	// Action 4: one time over 420, let us abandon our cells to get new ones the next turn
-	if (rand() % 420 == 42)
-		actions->add_surrender_action();
-
-	printf("Sending actions...\n");
-**/
 	session->send_actions(*actions);
 }
 
@@ -51,9 +35,15 @@ float dist(float x1, float x2, float y1, float y2)
 }
 
 // distance entre 2 cellules
-float cellDistance(const TurnPlayerCell & C1, const TurnPlayerCell & C2)
+float dist(const TurnPlayerCell & C1, const TurnPlayerCell & C2)
 {
 	return dist( C1.position.x, C2.position.x, C1.position.y, C2.position.y);
+}
+
+// distance entre 1 cellule et un virus
+float dist(const TurnPlayerCell & C1, const TurnVirus & V)
+{
+	return dist( C1.position.x, C1.position.x, V.position.x, V.position.y);
 }
 
 // get radius
@@ -135,3 +125,32 @@ void goToOppositeDirectionFromDangerousCell(int ennemiIndex, const TurnPlayerCel
 }
 
 
+bool targetIsSafe(const TurnPlayerCell & cell, const Position & pos)
+{
+	TurnPlayerCell targetCell;
+	targetCell.position.x=pos.x;
+	targetCell.position.y=pos.y;
+	
+	// test Dangerous cell at destination
+	vector<int> dangerousCells = isInDangerFromAnotherCell(targetCell);
+	if (dangerousCells.size())
+	{
+		return false;
+	}
+	
+	// test Virus at destination
+	for (const TurnVirus & virus : session->viruses())
+	{
+		// si dist cell-virus < radius(virus)
+		if ( dist(targetCell, virus) < radius(virus) )
+			return false;
+	}
+	return true;
+}
+
+//
+Position safe_direction(const TurnPlayerCell & cell, const Position & pos)
+{
+	// if the position is safe
+	return pos;
+}
