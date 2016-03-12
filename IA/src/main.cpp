@@ -15,8 +15,6 @@ int main(int argc, char ** argv)
 
     try
     {
-        Session session;
-
         printf("Connecting to %s:%d...\n", address.c_str(), port);
         session.connect(address, port);
 
