@@ -3,7 +3,30 @@
 
 void play_turn(){
 	played_cells.clear();
-	// Let us now try to do some actions!
+	
+	/** strategie de fuite **/
+	
+	// pour chacune de mes cellules
+	for (const TurnPlayerCell & cell : session->my_player_cells())
+	{
+		// recupere l'iD de la cellule ennemie la + dangereuse
+		vector<int> dangerousCells = isInDangerFromAnotherCell(cell);
+		if (dangerousCells.size())
+		{
+			int ennemiIndex = getNearestDangerousCell(dangerousCells, cell);
+			goToOppositeDirectionFromDangerousCell(ennemiIndex, cell);
+		}
+		else
+		{
+			// avance Random
+			actions->add_move_action(cell.pcell_id, float(rand())/RAND_MAX*p->map_width, float(rand())/RAND_MAX*p->map_height);
+
+		}
+	}
+
+	
+	
+/**	// Let us now try to do some actions!
 
 	// Action 1: let us try to move cell (id=73) to position (x=42, y=4242)
 	actions->add_move_action(73, 42, 4242);
@@ -16,6 +39,7 @@ void play_turn(){
 		actions->add_surrender_action();
 
 	printf("Sending actions...\n");
+**/
 	session->send_actions(*actions);
 }
 
