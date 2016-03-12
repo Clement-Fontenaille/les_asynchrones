@@ -7,7 +7,7 @@ void init_session(int argc, char ** argv){
     if (argc != 3)
     {
         printf("Usage: %s HOSTNAME PORT\n", argv[0]);
-        return 1;
+        exit(1);
     }
 
 	address = argv[1];
