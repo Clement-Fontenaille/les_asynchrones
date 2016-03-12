@@ -27,6 +27,7 @@ void play_turn(){
 		vector<int> dangerousCells = isInDangerFromAnotherCell(cell);
 		if (dangerousCells.size())
 		{
+			cout << "je suis en danger ! je FUIE !! " << endl;
 			int ennemiIndex = getNearestDangerousCell(dangerousCells, cell);
 			goToOppositeDirectionFromDangerousCell(ennemiIndex, cell);
 			played_cells.insert(cell.pcell_id);
@@ -34,11 +35,12 @@ void play_turn(){
 		}
 		vector<NeutralCell> edible = get_edible_neutrals_in_range(cell);
 		if (edible.size() > 0){
+			cout << "A TABLE " << endl;
 			actions->add_move_action(cell.pcell_id, edible[0].position.x, edible[0].position.y);
 			played_cells.insert(cell.pcell_id);
 			targeted_neutral_cells.insert(edible[0].id);
 		}
-
+		cout << "rand rand rand rand " << endl;
 		// DEFAULT : avance Random
 		actions->add_move_action(cell.pcell_id, float(rand())/RAND_MAX*p->map_width, float(rand())/RAND_MAX*p->map_height);
 		played_cells.insert(cell.pcell_id);
