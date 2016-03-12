@@ -160,7 +160,7 @@ int main(int argc, char ** argv)
             }
 
             // Let us now try to do some actions!
-			play_turn(actions, p,session);
+			play_turn();
         }
     }
     catch (const ainet16::GameFinishedException & e)

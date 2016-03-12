@@ -10,9 +10,9 @@ static Actions actions;
 static GameParameters p;
 static Session session;
 
-static std_set<int> played_cells;
+static set<int> played_cells;
 
-void play_turn(Actions & actions, GameParameters &p, Session & session);
+void play_turn();
 float dist(float x1, float x2, float y1, float y2);
 
 //~ struct Position
