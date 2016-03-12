@@ -17,5 +17,5 @@ using namespace ainet16;
 
 
 
-void play_turn(Actions & actions, GameParameters &p);
+void play_turn(Actions & actions, GameParameters &p, Session & session);
 float dist(float x1, float x2, float y1, float y2);
