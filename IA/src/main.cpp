@@ -159,13 +159,13 @@ int main(int argc, char ** argv)
          * ======================================= */
 		p = new GameParameters ();
 		init_game_parameters(*p,*welcome,*session);
-		actions = new Actions();
         while(session->is_logged())
         {
+			if (actions != nullptr) delete actions;
+			actions = new Actions();
 			init_turn(*session, *p);
 
             // Let us now try to do some actions!
-			actions->clear();
 			/*     .
 			 *    / \    If you use the same Actions instance on all turns,
 			 *   /   \   do NOT forget to clear the previously made actions
