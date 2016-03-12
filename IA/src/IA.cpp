@@ -1,7 +1,7 @@
 #include <cmath>
 #include "../include/IA.hpp"
 
-void play_turn(){
+void play_turn(Session & session){
 	played_cells.clear();
 	// Let us now try to do some actions!
 
