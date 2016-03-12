@@ -13,6 +13,10 @@ set<int> played_cells;
 set<int> targeted_neutral_cells;
 
 
+ostream & operator<< (ostream & out, const Position & arg){
+	return out << "(" << arg.x << "," << arg.y << ")";
+}
+
 void play_turn(){
 	played_cells.clear();
 	targeted_neutral_cells.clear();
@@ -22,7 +26,7 @@ void play_turn(){
 	// pour chacune de mes cellules
 	for (const TurnPlayerCell & cell : session->my_player_cells())
 	{
-		if (*(targeted_neutral_cells.lower_bound(cell.pcell_id))==cell.pcell_id) continue;
+		if (played_cells.find(cell.pcell_id) != played_cells.end()) continue;
 		// recupere l'iD de la cellule ennemie la + dangereuse
 		vector<int> dangerousCells = isInDangerFromAnotherCell(cell);
 		if (dangerousCells.size())
@@ -35,10 +39,11 @@ void play_turn(){
 		}
 		vector<NeutralCell> edible = get_edible_neutrals_in_range(cell);
 		if (edible.size() > 0){
-			cout << "A TABLE " << endl;
+			cout << "A TABLE " << edible[0].position << endl;
 			actions->add_move_action(cell.pcell_id, edible[0].position.x, edible[0].position.y);
 			played_cells.insert(cell.pcell_id);
 			targeted_neutral_cells.insert(edible[0].id);
+			continue;
 		}
 		cout << "rand rand rand rand " << endl;
 		// DEFAULT : avance Random
@@ -159,7 +164,7 @@ vector<NeutralCell> get_edible_neutrals_in_range(const TurnPlayerCell & myCell){
 	for (const NeutralCell & cell : session->neutral_cells())
 	{
 		// ignore already targeted neutral cell 
-		if (*(targeted_neutral_cells.lower_bound(cell.id))==cell.id) continue;
+		if (targeted_neutral_cells.find(cell.id) != targeted_neutral_cells.end()) continue;
 		// ignore if out of range
 		if (dist(myCell.position, cell.position) > max(radius(myCell),radius(cell))) continue;
 		//else
