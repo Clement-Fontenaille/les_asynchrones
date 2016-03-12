@@ -36,3 +36,4 @@ int getNearestDangerousCell(vector<int> dangerousCells, const TurnPlayerCell & m
 vector<NeutralCell> get_edible_neutrals_in_range(const TurnPlayerCell & myCell);
 void goToOppositeDirectionFromDangerousCell(int ennemiIndex, const TurnPlayerCell & myCell);
 Position select_safe_move(const TurnPlayerCell arg, const Position & target);
+bool targetIsSafe(const TurnPlayerCell & cell, const Position & pos);
