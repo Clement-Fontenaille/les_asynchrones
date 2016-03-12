@@ -14,14 +14,13 @@ int main(int argc, char ** argv)
         return 1;
     }
 
-    string address = argv[1];
-    string port_str = argv[2];
-    int port = std::stoi(port_str);
-    string name = "example_cpp";
+    address = argv[1];
+    port_str = argv[2];
+    port = std::stoi(port_str);
+    name = "example_cpp";
 
     try
     {
-        Session session;
 
         printf("Connecting to %s:%d...\n", address.c_str(), port);
         session.connect(address, port);
@@ -31,13 +30,13 @@ int main(int argc, char ** argv)
 
         printf("Waiting for WELCOME...\n");
         session.wait_for_welcome();
-        Welcome welcome = session.welcome();
+        welcome = session.welcome();
 
         /* =======================================
          * Informations within the WELCOME message
          * ======================================= */
 
-        GameParameters p = welcome.parameters;
+        p = welcome.parameters;
         printf("Game parameters:\n");
         printf("  map dimensions : (0,0) -> (%g,%g)\n", p.map_width, p.map_height);
         printf("  there will be %d turns\n", p.nb_turns);

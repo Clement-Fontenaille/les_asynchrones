@@ -6,13 +6,13 @@
 using namespace std;
 using namespace ainet16;
 
-//~ static Session session;
-//~ static Welcome welcome;
-//~ static GameParameters p;
-//~ static string address;
-//~ static string port_str;
-//~ static int port;
-//~ static string name;
+static Session session;
+static Welcome welcome;
+static GameParameters p;
+static string address;
+static string port_str;
+static int port;
+static string name;
 //~ static Actions actions;
 
 
