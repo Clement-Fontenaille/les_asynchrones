@@ -12,9 +12,15 @@ static Session * session;
 
 static set<int> played_cells;
 
-void play_turn();
-float dist(float x1, float x2, float y1, float y2);
+float max(float a, float b);
 
+void play_turn(Actions & actions, GameParameters &p, Session & session);
+float dist(float x1, float x2, float y1, float y2);
+float cellDistance(const TurnPlayerCell & C1, const TurnPlayerCell & C2);
+float radius(const TurnPlayerCell & C);
+
+float moveDistance(const TurnPlayerCell & cell);
+bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell);
 //~ struct Position
 //~ {
 	//~ float x; //! L'abscisse, comprise dans [0,map_width[
