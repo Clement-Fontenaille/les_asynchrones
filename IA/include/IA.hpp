@@ -17,5 +17,5 @@ static Actions actions;
 
 
 
-void play_turn();
+void play_turn(Actions & actions);
 float dist(float x1, float x2, float y1, float y2);
