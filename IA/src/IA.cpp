@@ -1,6 +1,17 @@
 #include "../include/IA.hpp"
 #include <vector>
 
+string address;
+string port_str;
+int port;
+string name;
+Actions * actions;
+GameParameters * p;
+Session * session;
+Welcome * welcome;
+set<int> played_cells;
+
+
 void play_turn(){
 	played_cells.clear();
 	
