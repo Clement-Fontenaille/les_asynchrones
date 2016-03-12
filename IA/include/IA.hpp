@@ -28,6 +28,10 @@ float radius(const TurnPlayerCell & C);
 float moveDistance(const TurnPlayerCell & cell);
 bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell);
 bool canEatEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell);
+vector<int> isInDangerFromAnotherCell(const TurnPlayerCell & myCell);
+
+int getNearestDangerousCell(vector<int> dangerousCells, const TurnPlayerCell & myCell);
+void goToOppositeDirectionFromDangerousCell(int ennemiIndex, const TurnPlayerCell & myCell);
 
 //~ struct Position
 //~ {

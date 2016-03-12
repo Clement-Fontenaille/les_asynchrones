@@ -1,4 +1,5 @@
 #include "../include/IA.hpp"
+#include <vector>
 
 void play_turn(){
 	played_cells.clear();
@@ -18,6 +19,8 @@ void play_turn(){
 	session->send_actions(*actions);
 }
 
+
+// distance entre 2 coordonnées
 float dist(float x1, float x2, float y1, float y2)
 {
 	return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
@@ -64,3 +67,47 @@ bool canEatEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & 
     else
         return false;
 }
+
+// teste si myCell est en danger imminent
+vector<int> isInDangerFromAnotherCell(const TurnPlayerCell & myCell)
+{
+	vector<int> dangerousEnnemyCells;
+	// teste tous les ennemis
+	int cpt=0;
+	for (const TurnPlayerCell & cell : session->ennemy_player_cells())
+	{
+		// si en danger
+		if (dangerEnnemyCell(cell, myCell))
+		{
+			dangerousEnnemyCells.push_back(cpt);
+		}
+		cpt++;
+	}	
+	return dangerousEnnemyCells;
+}
+
+// recupere l'index du celle ennemi le + dangereux
+int getNearestDangerousCell(vector<int> dangerousCells, const TurnPlayerCell & myCell)
+{
+	double minDist = cellDistance(session->ennemy_player_cells()[0], myCell);
+	int index = 1;
+	for (int i=1; i<dangerousCells.size(); i++)
+	{
+		if (cellDistance(session->ennemy_player_cells()[i], myCell) < minDist)
+		{
+			minDist = cellDistance(session->ennemy_player_cells()[i], myCell);
+			index = i;
+		}
+	}
+	return index;
+}
+
+// va dans la direction opposée
+void goToOppositeDirectionFromDangerousCell(int ennemiIndex, const TurnPlayerCell & myCell)
+{
+	// Action 1: let us try to move cell (id=73) to position (x=42, y=4242)
+	actions->add_move_action(myCell.pcell_id, session->ennemy_player_cells()[ennemiIndex].position.x*(-1), 
+									   session->ennemy_player_cells()[ennemiIndex].position.y*(-1));
+}
+
+
