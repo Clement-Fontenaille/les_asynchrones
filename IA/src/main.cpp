@@ -1,10 +1,4 @@
-#include <iostream>
-#include <stdio.h>
-
-#include <ainetlib16.hpp>
-
-using namespace std;
-using namespace ainet16;
+#include "../include/IA.hpp"
 
 int main(int argc, char ** argv)
 {
