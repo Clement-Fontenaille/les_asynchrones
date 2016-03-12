@@ -23,3 +23,45 @@ float dist(float x1, float x2, float y1, float y2)
 {
 	return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 }
+
+// distance entre 2 cellules
+float cellDistance(const TurnPlayerCell & C1, const TurnPlayerCell & C2)
+{
+	return dist( C1.position.x, C2.position.x, C1.position.y, C2.position.y);
+}
+
+// get radius
+float radius(const TurnPlayerCell & C)
+{
+	return C.mass*p.radius_factor;
+}
+
+// distance qu'une cellule peut franchir en 1 tour
+float moveDistance(const TurnPlayerCell & cell)
+{
+	return max(0, p.base_cell_speed - p.speed_loss_factor * cell.mass);
+}
+
+// Est que myCell peut être mangé par ennemyCell au prochain tour ?
+bool dangerEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell)
+{
+	if(
+		(radius(myCell) < radius(ennemyCell)) &&
+		(cellDistance(ennemyCell, myCell) < (moveDistance(ennemyCell) + radius(ennemyCell)))
+	) 
+        return true;
+    else
+        return false;
+}
+
+// Est que myCell peut manger ennemyCell au prochain tour ?
+bool canEatEnnemyCell(const TurnPlayerCell & ennemyCell, const TurnPlayerCell & myCell)
+{
+	if(
+		(radius(myCell) > radius(ennemyCell)) &&
+		(cellDistance(ennemyCell, myCell) < (moveDistance(myCell) + radius(myCell)))
+	) 
+        return true;
+    else
+        return false;
+}
