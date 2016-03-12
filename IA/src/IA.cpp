@@ -1,4 +1,3 @@
-#include <cmath>
 #include "../include/IA.hpp"
 
 void play_turn(){
@@ -33,13 +32,13 @@ float cellDistance(const TurnPlayerCell & C1, const TurnPlayerCell & C2)
 // get radius
 float radius(const TurnPlayerCell & C)
 {
-	return C.mass*p.radius_factor;
+	return C.mass*p->radius_factor;
 }
 
 // distance qu'une cellule peut franchir en 1 tour
 float moveDistance(const TurnPlayerCell & cell)
 {
-	return max(0, p.base_cell_speed - p.speed_loss_factor * cell.mass);
+	return max(0.0f, p->base_cell_speed - p->speed_loss_factor * cell.mass);
 }
 
 // Est que myCell peut être mangé par ennemyCell au prochain tour ?
