@@ -15,8 +15,6 @@ int main(int argc, char ** argv)
 
     try
     {
-        Session session;
-
         printf("Connecting to %s:%d...\n", address.c_str(), port);
         session.connect(address, port);
 
@@ -162,7 +160,7 @@ int main(int argc, char ** argv)
             }
 
             // Let us now try to do some actions!
-			play_turn(actions, p,session);
+			play_turn();
         }
     }
     catch (const ainet16::GameFinishedException & e)
