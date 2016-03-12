@@ -9,15 +9,15 @@
 using namespace std;
 using namespace ainet16;
 
-static string address;
-static string port_str;
-static int port;
-static string name;
-static Actions * actions;
-static GameParameters * p;
-static Session * session;
-static Welcome * welcome;
-static set<int> played_cells;
+extern string address;
+extern string port_str;
+extern int port;
+extern string name;
+extern Actions * actions;
+extern GameParameters * p;
+extern Session * session;
+extern Welcome * welcome;
+extern set<int> played_cells;
 
 void play_turn();
 
