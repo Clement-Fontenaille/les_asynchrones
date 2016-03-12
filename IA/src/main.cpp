@@ -323,7 +323,7 @@ int main(int argc, char ** argv)
             }
 
 			init_turn();
-			play_turn();
+			play_turn(actions);
 		}
     }
     catch (const ainet16::GameFinishedException & e)
